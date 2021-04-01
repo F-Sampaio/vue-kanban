@@ -6,63 +6,35 @@
           v-model="newTask"
           placeholder="Enter Task..."
           @keyup.enter="add"
-        ></b-form-input> <b-button class="ml-2 " variant="primary" @click="add">Add</b-button>
+        ></b-form-input> 
+        <b-button class="ml-2 " variant="primary" @click="add">Add</b-button>
       </div>
     </div>
     <div class="row mt-3">
-      <div class="col-md-3">
-        <div class="p-2 alert-secondary">
-          <h3>Backlog</h3>
-          <draggable  class="list-group kanban-column" :list="arrBackLogs" group="tasks">
-            <div class="list-group-item" v-for="element in arrBackLogs" :key="element.name">
-              {{ element.name }}
-            </div>
-          </draggable>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="p-2 alert-primary">
-          <h3>In Progress</h3>
-          <draggable  class="list-group kanban-column" :list="arrInProgress" group="tasks">
-            <div class="list-group-item" v-for="element in arrInProgress" :key="element.name">
-              {{ element.name }}
-            </div>
-          </draggable>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="p-2 alert-warning">
-          <h3>Tested</h3>
-          <draggable  class="list-group kanban-column" :list="arrTestes" group="tasks">
-            <div class="list-group-item" v-for="element in arrTestes" :key="element.name">
-              {{ element.name }}
-            </div>
-          </draggable>
-        </div>
-      </div>
-
-      <div class="col-md-3">
-        <div class="p-2 alert-success">
-          <h3>Done</h3>
-          <draggable  class="list-group kanban-column" :list="arrDone" group="tasks">
-            <div class="list-group-item" v-for="element in arrDone" :key="element.name">
-              {{ element.name }}
-            </div>
-          </draggable>
-        </div>
-      </div>
+      <Board
+        :name="'Backlog'"
+        :list="arrBackLogs"
+        :arr="arrBackLogs"
+      />
+      <Board 
+        :name="'In Progress'"
+        :list="arrInProgress"
+        :arr="arrInProgress"
+      />
+      <Board 
+        :name="'Done'"
+        :list="arrDone"
+        :arr="arrDone"
+      />
     </div>
   </div>
 </template>
 
 <script>
-import draggable from 'vuedraggable'
-
+import Board from './components/Board'
 export default {
   name: 'App',
-  components: { draggable },
+  components: {Board },
   data() {
     return {
       newTask: '',
